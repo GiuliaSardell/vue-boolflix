@@ -36,11 +36,9 @@ export default {
       this.getApi();
     },
     getApi(){
-      // this.isLoading = true;
+    
       axios.get(`${this.generalUrl}${this.myKey}&query=${this.textInput}${this.language}`)
       .then(r =>{
-        
-        // this.isLoading = false;
   
         console.log('r',r)
         console.log('r.data.results',r.data.results)
