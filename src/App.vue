@@ -42,7 +42,8 @@ export default {
         
         // this.isLoading = false;
   
-        console.log('r',r.data.results)
+        console.log('r',r)
+        console.log('r.data.results',r.data.results)
         this.films = r.data.results;
         console.log('films array',this.films)
         console.log('textInput',this.textInput)
