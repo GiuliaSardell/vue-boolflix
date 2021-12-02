@@ -22,11 +22,12 @@ export default {
     return{
       textInput: "",
       films: [],
+    
+      typeInput: "",
       generalUrl: 'https://api.themoviedb.org/3/search/movie?',
       myKey: 'api_key=5bb76975e29ce4ec5d24abbc5f794e87',
-      query: '&query=ritorno al futuro',
-      language: '&language=it-IT',
-      
+      // query: '&query=ritorno al futuro',
+      language: '&language=it-IT'
       
     }
   },
@@ -39,14 +40,11 @@ export default {
     
       axios.get(`${this.generalUrl}${this.myKey}&query=${this.textInput}${this.language}`)
       .then(r =>{
-  
         console.log('r',r)
         console.log('r.data.results',r.data.results)
         this.films = r.data.results;
         console.log('films array',this.films)
         console.log('textInput',this.textInput)
-        
-       
       })
       .catch( e => {
         console.log(e);
