@@ -1,23 +1,57 @@
 <template>
   <main>
 
-    <div v-for="film in filmList"
-    :key="film.id"> 
+    <!-- voglio mettere film e serie visibili quando una variabile booleana è vera
+    devo mettere la variabile = false, diventa true se l'array non è vuoto-->
+    <div class="films" >
+      <h2 class="my-5" v-if="fullArrayFilm">FILM</h2> 
+
+      <div v-for="film in filmList"
+      :key="film.id">
+      
       <h4>Titolo: {{film.title}}</h4>
       <h6>Titolo originale: {{film.original_title}}</h6>
       <!-- <h6>Lingua: {{film.original_language}}</h6> -->
-      <h6 v-if="film.original_language === 'en'">
-        <img src="../assets/img/it.png" alt="">
-      </h6>
-      <h6 v-else-if="film.original_language === 'it'">
-        <img src="../assets/img/en.png" alt="">
+      <!-- <h6 v-if="film.original_language === 'en'">
+        Lingua: <img src="../assets/img/it.png" alt="">
+      </h6> -->
+      <h6 v-if="langArray.includes('en')">
+        Lingua: <img  :src="`../assets/img/${film.original_language}.png`" :alt="`${film.original_language}`">
       </h6>
       <h6 v-else>
-        {{film.original_language}}
+        Lingua: {{film.original_language}}
       </h6>
       <h6>Voto: {{film.vote_average}}</h6>
     
+      </div>
     </div>
+    
+
+    <div class="series justify-content-center">
+
+      <h2 class="my-5 container" v-if="fullArraySerie">SERIE</h2> 
+
+      <div class=""
+      v-for="serie in serieList"
+      :key="serie.id"> 
+      
+        <h4>Titolo: {{serie.name}}</h4>
+        <h6>Titolo originale: {{serie.original_name}}</h6>
+        <!-- <h6>Lingua: {{film.original_language}}</h6> -->
+        <h6 v-if="serie.original_language === 'en'">
+          Lingua: <img src="../assets/img/it.png" alt="">
+        </h6>
+        <h6 v-else-if="serie.original_language === 'it'">
+          Lingua: <img src="../assets/img/en.png" alt="">
+        </h6>
+        <h6 v-else>
+          Lingua: {{serie.original_language}}
+        </h6>
+        <h6>Voto: {{serie.vote_average}}</h6>
+    
+      </div>
+    </div>
+    
     <Card />
   </main>
 </template>
@@ -30,21 +64,31 @@ import Card from "./Card.vue"
 export default {
   name: 'Main',
   props:{
-    filmList: Array
+    filmList: Array,
+    serieList: Array,
+    fullArrayFilm: Boolean,
+    fullArraySerie: Boolean
   },
   components:{
     Card
+  },
+  data(){
+    return{
+      langArray: ['en', 'it']
+      
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 
-
-
-
 div{
   margin: 20px 10px;
+  img{
+    height: 20px;
+    width: 30px;
+  }
 }
 
 </style>
