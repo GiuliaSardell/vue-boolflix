@@ -1,16 +1,6 @@
 <template>
   <main>
 
-
-      
-
-
-        
-      
-
-        
-      
-
     <div class="films" >
       <h2 class="my-5" v-if="fullArrayFilm">FILM</h2> 
 
@@ -57,23 +47,15 @@
               </div>
             </div>
 
-            <div class="card__face card__face--back">Trama: {{film.overview}}</div>
-
-
+            <div class="card__face card__face--back">
+              <p v-if="film.overview != ''">Trama: {{film.overview}}</p>
+              <p v-else>Trama: Non disponibile</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     
-
-
-
-
-
-
-
-
-
 
 
     <div class="series justify-content-center">
@@ -123,7 +105,9 @@
                 </div>
                 
             </div>
-            <div class="card__face card__face--back">Trama: {{serie.overview}}</div>
+            <div class="card__face card__face--back">
+              <p v-if="serie.overview != ''">Trama: {{serie.overview}}</p>
+              <p v-else>Trama: Non disponibile</p></div>
 
           </div>
         </div>
@@ -205,6 +189,8 @@ export default {
 
 .card__face--back {
   transform: rotateY(180deg);
+  overflow: auto;
+
 }
 
 /* this style is applied when the card is clicked */
