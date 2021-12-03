@@ -11,17 +11,45 @@
       
       <h4>Titolo: {{film.title}}</h4>
       <h6>Titolo originale: {{film.original_title}}</h6>
+      <img
+      :src="`https://image.tmdb.org/t/p/w342/${film.poster_path}`" 
+      :alt="film.title">
+     
+
       <!-- <h6>Lingua: {{film.original_language}}</h6> -->
       <!-- <h6 v-if="film.original_language === 'en'">
         Lingua: <img src="../assets/img/it.png" alt="">
       </h6> -->
-      <h6 v-if="langArray.includes('en')">
+      <!-- <h6 v-if="langArray.includes('en')">
         Lingua: <img  :src="`../assets/img/${film.original_language}.png`" :alt="`${film.original_language}`">
       </h6>
       <h6 v-else>
         Lingua: {{film.original_language}}
-      </h6>
-      <h6>Voto: {{film.vote_average}}</h6>
+      </h6> -->
+      <div>
+        <p v-if="langArray.includes(film.original_language)"> Lingua: 
+          <img class="flag"
+          :src="require(`../assets/img/${film.original_language}.png`)" :alt="film.title">
+        </p>
+        
+        <p v-else>Lingua: {{film.original_language}}</p>
+      </div>
+      
+      <!-- <h6>Voto: {{film.vote_average}} -> {{math.round(film.vote_average/2)}} </h6>  -->
+      <h6>Voto: {{Math.round(film.vote_average/2)}}</h6>
+
+  
+      <div>
+        <i
+        v-for="(item, index) in 5" :key="index"
+        class="fa-star"
+        :class="index < Math.round(film.vote_average/2) ? 'fas' : 'far' ">
+        </i>
+       
+  
+      </div>
+
+
     
       </div>
     </div>
@@ -29,7 +57,7 @@
 
     <div class="series justify-content-center">
 
-      <h2 class="my-5 container" v-if="fullArraySerie">SERIE</h2> 
+      <h2 class="my-5 container">SERIE</h2> 
 
       <div class=""
       v-for="serie in serieList"
@@ -83,11 +111,18 @@ export default {
 
 <style lang="scss" scoped>
 
-div{
+.series, .films{
   margin: 20px 10px;
-  img{
+  h4{
+    margin-top: 50px;
+  }
+  .flag{
     height: 20px;
     width: 30px;
+  }
+  img{
+    width: 200px;
+    margin: 10px 0;
   }
 }
 
